@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello there</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #151a3b;
+    --night-2: #262f68;
+    --parchment: #f1e5c4;
+    --ink: #2a1a10;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: radial-gradient(ellipse at 50% 35%, var(--night-2), var(--night) 75%);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    font-family: "IM Fell English", Georgia, "Times New Roman", serif;
+  }
+
+  .scene {
+    position: relative;
+    width: min(86vw, 62vh, 400px);
+    aspect-ratio: 300 / 540;
+  }
+  .figure { width: 100%; height: 100%; display: block; overflow: visible; }
+
+  .bubble {
+    position: absolute;
+    top: 1%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    transform-origin: 50% 100%;
+    background: var(--parchment);
+    color: var(--ink);
+    padding: .55em 1.1em;
+    border-radius: 18px;
+    border: 3px solid var(--ink);
+    font-style: italic;
+    font-size: clamp(1.5rem, 6.4vw, 2.3rem);
+    white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(0,0,0,.45);
+    animation: pop .6s .5s cubic-bezier(.2, 1.4, .4, 1) forwards;
+  }
+  .bubble::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -17px;
+    width: 22px;
+    height: 22px;
+    background: var(--parchment);
+    border-right: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .wave {
+    transform-origin: 188px 145px;
+    animation: wave .75s ease-in-out infinite alternate;
+  }
+  .breathe {
+    transform-origin: 150px 430px;
+    animation: breathe 3s ease-in-out infinite;
+  }
+
+  @keyframes pop { to { transform: translateX(-50%) scale(1); } }
+  @keyframes wave {
+    from { transform: rotate(-9deg); }
+    to   { transform: rotate(13deg); }
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scaleY(1); }
+    50%      { transform: scaleY(1.008); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wave, .breathe { animation: none; }
+    .bubble { animation: none; transform: translateX(-50%) scale(1); }
+  }
+</style>
+</head>
+<body>
+  <main class="scene">
+    <div class="bubble" role="heading" aria-level="1">Hello there</div>
+
+    <svg class="figure" viewBox="0 -80 300 540" role="img" aria-label="An illustrated gentleman in 18th-century dress waving hello">
+      <!-- ground shadow -->
+      <ellipse cx="150" cy="436" rx="78" ry="9" fill="#000" opacity=".35"/>
+
+      <g class="breathe">
+        <!-- ponytail and ribbon -->
+        <path d="M122 70 C98 78 92 108 100 138 C108 124 116 108 124 96 Z" fill="#5a3a22"/>
+        <rect x="104" y="104" width="12" height="7" rx="2" fill="#15151f" transform="rotate(-24 110 108)"/>
+
+        <!-- legs: breeches, stockings, shoes -->
+        <rect x="116" y="288" width="31" height="58" rx="6" fill="#e9dcc0"/>
+        <rect x="153" y="288" width="31" height="58" rx="6" fill="#e9dcc0"/>
+        <rect x="121" y="344" width="22" height="68" rx="5" fill="#f7f3ea"/>
+        <rect x="157" y="344" width="22" height="68" rx="5" fill="#f7f3ea"/>
+        <path d="M112 412 h36 q4 0 4 6 v10 h-44 v-8 q0 -8 4 -8 z" fill="#15151f"/>
+        <path d="M152 412 h36 q4 0 4 6 v10 h-44 v-8 q0 -8 4 -8 z" fill="#15151f"/>
+        <rect x="126" y="414" width="12" height="9" rx="1.5" fill="none" stroke="#d1a94f" stroke-width="2.5"/>
+        <rect x="162" y="414" width="12" height="9" rx="1.5" fill="none" stroke="#d1a94f" stroke-width="2.5"/>
+
+        <!-- coat -->
+        <path d="M112 138 C118 128 182 128 188 138 L204 304 Q150 318 96 304 Z" fill="#2c4181"/>
+        <!-- waistcoat -->
+        <path d="M137 134 L163 134 L160 290 Q150 294 140 290 Z" fill="#ece0c2"/>
+        <!-- coat lapel edges -->
+        <path d="M137 134 L140 290" stroke="#1b2a5c" stroke-width="3" fill="none"/>
+        <path d="M163 134 L160 290" stroke="#1b2a5c" stroke-width="3" fill="none"/>
+        <!-- buttons -->
+        <g fill="#d1a94f">
+          <circle cx="150" cy="176" r="3.6"/><circle cx="150" cy="206" r="3.6"/>
+          <circle cx="150" cy="236" r="3.6"/><circle cx="150" cy="266" r="3.6"/>
+          <circle cx="132" cy="184" r="3"/><circle cx="130" cy="214" r="3"/><circle cx="129" cy="244" r="3"/>
+        </g>
+
+        <!-- resting arm (left side of figure) -->
+        <path d="M114 142 C98 170 94 224 96 262" stroke="#2c4181" stroke-width="26" stroke-linecap="round" fill="none"/>
+        <rect x="83" y="262" width="26" height="9" rx="4" fill="#f7f3ea"/>
+        <circle cx="96" cy="282" r="12" fill="#e8b98f"/>
+
+        <!-- neck, cravat, head -->
+        <rect x="140" y="112" width="20" height="24" rx="6" fill="#d9a67c"/>
+        <path d="M128 126 Q150 142 172 126 L166 148 Q150 160 134 148 Z" fill="#f7f3ea" stroke="#d8cfb8" stroke-width="1.5"/>
+        <circle cx="150" cy="86" r="34" fill="#e8b98f"/>
+        <!-- hair -->
+        <path d="M116 84 C112 48 132 40 152 40 C174 40 190 52 184 84 C176 66 168 58 150 58 C132 58 122 66 116 84 Z" fill="#5a3a22"/>
+        <!-- face -->
+        <circle cx="138" cy="90" r="3" fill="#2a1a10"/>
+        <circle cx="162" cy="90" r="3" fill="#2a1a10"/>
+        <path d="M135 80 q4 -4 8 -1 M157 79 q4 -3 8 1" stroke="#4a2f1b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M138 104 Q150 116 162 104" stroke="#8a4a3a" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+        <!-- waving arm (right side of figure) -->
+        <g class="wave">
+          <path d="M186 144 L224 122 L236 76" stroke="#2c4181" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <rect x="223" y="66" width="26" height="9" rx="4" fill="#f7f3ea" transform="rotate(10 236 70)"/>
+          <circle cx="238" cy="54" r="13" fill="#e8b98f"/>
+          <!-- fingers -->
+          <g stroke="#e8b98f" stroke-width="5" stroke-linecap="round">
+            <path d="M229 46 L226 34"/><path d="M235 42 L234 28"/><path d="M241 42 L243 28"/><path d="M247 46 L252 34"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </main>
+</body>
+</html>
